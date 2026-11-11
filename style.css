@@ -1,0 +1,67 @@
+/* Matches the Reliable Robotics flight-test analysis report format (FAA BAA #005 final report, Figs. 8-10):
+   logo + grey title block, navy section headings, two-column metric tables, matplotlib-styled plots. */
+@font-face { font-family: 'DejaVu Sans'; src: url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf') format('truetype'); font-weight: 400; }
+@font-face { font-family: 'DejaVu Sans'; src: url('https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans-Bold.ttf') format('truetype'); font-weight: 700; }
+
+:root {
+  --navy: #233454;
+  --title-bg: #eaeaef;
+  --title-border: #a3a3a8;
+  --rule: #c9c9c9;
+  --page-border: #3b3b3b;
+  --ink: #000;
+  --mpl-grid: #e2e2e2;
+  --seagreen: #2e8b57;
+  --crimson: #dc143c;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #d9d9dc; }
+body { font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+.viewer { padding: 22px 0 10px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.page { width: 1000px; background: #fff; border: 1.5px solid var(--page-border); padding: 24px 30px 30px; position: relative; }
+
+.rpt-head { display: flex; align-items: stretch; gap: 26px; margin-bottom: 34px; }
+.logo { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; padding: 2px 0; }
+.logo svg { width: 74px; height: 74px; display: block; }
+.logo .wm { font-family: 'Barlow Semi Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 800; font-size: 46px; line-height: 37px; letter-spacing: 0.2px; color: #000; text-transform: uppercase; margin-top: 1px; }
+.title-box { flex: 1; background: var(--title-bg); border: 1px solid var(--title-border); padding: 14px 20px; font-size: 21.5px; line-height: 28px; display: flex; flex-direction: column; justify-content: center; }
+.title-box b { font-weight: 700; }
+
+h2 { color: var(--navy); font-size: 27px; font-weight: 700; margin: 30px 0 9px; display: flex; align-items: baseline; gap: 14px; }
+h2:first-of-type { margin-top: 0; }
+h2 .h-ctl { margin-left: auto; font-size: 13px; color: #333; font-weight: 400; }
+
+table.metrics { width: 100%; border-collapse: collapse; font-size: 16.5px; }
+table.metrics td { border: 1px solid var(--rule); padding: 5px 10px; height: 30px; vertical-align: middle; }
+table.metrics td:first-child { width: 40%; }
+table.metrics td:last-child { font-weight: 700; }
+table.metrics .sub { font-weight: 400; color: #333; }
+.ctl { font: inherit; font-weight: 700; border: 1px solid #b9b9b9; background: #fff; padding: 1px 4px; border-radius: 2px; color: #000; }
+input.ctl { width: 64px; text-align: right; }
+
+table.grid { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.grid td { white-space: nowrap; }
+table.grid th { vertical-align: bottom; line-height: 16px; }
+table.grid th, table.grid td { border: 1px solid var(--rule); padding: 5px 8px; height: 27px; text-align: left; }
+table.grid th { font-weight: 700; background: #f4f4f6; }
+table.grid td.num, table.grid th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.grid tr.sel td { background: #eef1f7; }
+table.grid tbody tr { cursor: pointer; }
+table.grid tbody tr:hover td { background: #f6f7fa; }
+.v-ready { color: #1d7a3e; font-weight: 700; }
+.v-not { color: #b3172f; font-weight: 700; }
+.v-inc { color: #a35a00; font-weight: 700; }
+
+.plot { position: relative; font-family: 'DejaVu Sans', sans-serif; }
+.plot svg text { font-family: 'DejaVu Sans', sans-serif; }
+.mpl-legend { display: flex; justify-content: center; margin: 2px 0 6px; }
+.mpl-legend .box { border: 1px solid #cfcfcf; border-radius: 3px; padding: 4px 9px; display: grid; grid-auto-flow: column; grid-template-rows: repeat(var(--rows, 2), auto); column-gap: 20px; row-gap: 2px; font-family: 'DejaVu Sans', sans-serif; font-size: 10.5px; }
+.mpl-legend .it { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.mpl-legend svg { width: 26px; height: 11px; }
+#map { position: relative; width: 938px; height: 880px; }
+#map canvas { position: absolute; left: 0; top: 0; }
+.tip { position: absolute; pointer-events: none; background: #fff; border: 1px solid #000; padding: 5px 7px; font-family: 'DejaVu Sans', sans-serif; font-size: 11.5px; line-height: 15px; display: none; z-index: 5; white-space: nowrap; }
+.note { font-size: 12.5px; color: #333; margin: 6px 0 0; line-height: 17px; }
+.loading { font-size: 14px; color: #555; padding: 8px 0; }
+footer { font-size: 12px; color: #555; padding: 4px 0 22px; text-align: center; font-family: Arial, sans-serif; }
+footer a { color: #555; }

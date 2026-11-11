@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1240">
+<title>C2 Link Readiness | Flight Test Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<template id="head-tpl">
+  <header class="rpt-head">
+    <div class="logo">
+      <svg viewBox="0 0 260 260" aria-hidden="true"><path fill="#000" d="M152.69 136h-44.58l22.29-48.79zM96.9 163.81l-18.27 40h103.54l-18.26-40zM254.54 22.16v215.68A22.16 22.16 0 0 1 232.39 260H27.61a22.16 22.16 0 0 1-22.15-22.16V22.16A22.16 22.16 0 0 1 27.61 0h204.78a22.16 22.16 0 0 1 22.15 22.16zM195.3 163.34h31l-11.54-26.82H183.1l-52.73-116-53.15 116H45.38l-11.65 26.82h31.19l-31.23 68.13h192.62z"/></svg>
+      <div class="wm">Reliable<br>Robotics</div>
+    </div>
+    <div class="title-box"><div><b>Flight Test:</b> <span class="t-title"></span></div><div><b>Date:</b> <span class="t-date"></span></div></div>
+  </header>
+</template>
+
+<div class="viewer">
+  <section class="page" id="p1">
+    <div class="head" data-title="C2 Link Readiness, KCVH C-Band CNPC Uplink"></div>
+    <h2>Link Readiness Metrics</h2>
+    <table class="metrics" id="metrics"><tbody><tr><td colspan="2" class="loading">Fitting the dropout model to the packet logs...</td></tr></tbody></table>
+
+    <h2>2D Top-Down Plot
+      <span class="h-ctl">Layer
+        <select id="layer" class="ctl">
+          <option value="post">Predicted dropout rate, post-update</option>
+          <option value="pre">Predicted dropout rate, pre-update</option>
+          <option value="unc">Uncertainty (90% interval ratio)</option>
+          <option value="none">Packet status only</option>
+        </select>
+      </span>
+    </h2>
+    <div class="mpl-legend" id="map-legend"></div>
+    <div class="plot" id="map"><div class="tip" id="tip"></div></div>
+  </section>
+
+  <section class="page" id="p2">
+    <div class="head" data-title="C2 Link Readiness by Approach" data-approach="1"></div>
+    <h2>Approach Readiness <span class="h-ctl">Typical post-update day; requirement and outage threshold set on page 1</span></h2>
+    <table class="grid" id="approach-table"></table>
+    <p class="note">* Notional approach, never flown: its prediction rests on spatial smoothing from neighboring cells and the range term, so its interval is wide. Single-run columns include day-to-day variation; predicted continuity is for a typical day.</p>
+    <h2>Predicted Continuity by Approach</h2>
+    <div class="mpl-legend" id="ci-legend"></div>
+    <div class="plot" id="ci-plot"></div>
+    <h2>Along-Track Plots <span class="h-ctl" id="along-label"></span></h2>
+    <div class="mpl-legend" id="along-legend"></div>
+    <div class="plot" id="along-plot"></div>
+  </section>
+
+  <section class="page" id="p3">
+    <div class="head" data-title="C2 Link Characterization Plan and Model Checks"></div>
+    <h2>Characterization Plan <span class="h-ctl">Additional post-update runs, one per test day</span></h2>
+    <table class="grid" id="plan-table"></table>
+    <div class="mpl-legend" id="plan-legend"></div>
+    <div class="plot" id="plan-plot"></div>
+    <h2>Leave-One-Day-Out Backtest</h2>
+    <div class="mpl-legend" id="bt-legend"></div>
+    <div class="plot" id="bt-plot"></div>
+    <h2>Method</h2>
+    <table class="metrics" id="method"></table>
+  </section>
+  <footer>Unofficial concept demo by Mohith Gajjela. Not affiliated with Reliable Robotics. Synthetic data (seeded packet logs; terrain from AWS Terrain Tiles; basemap &copy; Esri, HERE, Garmin, OpenStreetMap contributors). <a href="https://github.com/Mohith26/reliable-robotics-c2-link-readiness">Source</a></footer>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
